@@ -55,8 +55,19 @@
 
   function showNotification(title, description) {
     let notificationBox = document.getElementsByClassName("home__notification")[0]
-    let notificationTitle = document.getElementsByClassName("home__notification")[0]
-    let notificationDescription = document.getElementsByClassName("home__notification")[0]
+    let notificationTitle = document.getElementsByClassName("home__notification-box-title-text")[0]
+    let notificationDescription = document.getElementsByClassName("home__notification-box-description-text")[0]
+
+    notificationBox.style.display = "flex"
+
+    notificationTitle.innerHTML = title
+    notificationDescription.innerHTML = description
+
+    setTimeout(() => {
+      notificationBox.style.display = "none"
+      notificationTitle = "Notification Text"
+      notificationDescription = "Notification Description"
+    }, 8000)
   }
 
   function calculateTwoSum() {
@@ -67,10 +78,37 @@
       if(inputData != "") {
         arrayInput = inputData.split(",")
       } else {
+        showNotification("Input data is empty!","Please fill the input data correctly.")
         return false  
       }
-  
-      console.log(arrayInput)
+
+      if(targetData == "") {
+        showNotification("Target data is empty!","Please fill the target data correctly.")
+        return false  
+      }
+
+      arrayInput.forEach(dt => {
+        if(isNaN(dt)) {
+          showNotification("Not a number detected!","Please use numerical value only.")
+          return false
+        }
+      });
+
+      if(isNaN(targetData)) {
+        showNotification("Not a number detected!","Please use numerical value only.")
+        return false
+      }
+
+      let correctTarget = []
+
+      for(i = 0; i < arrayInput.length; i++) {
+        for(j = 0; j < arrayInput.length; j++) {
+          if(Number(arrayInput[i]) + Number(arrayInput[j]) == Number(targetData)) {
+            correctTarget.push([i,j])
+          }
+        }
+      }
+
   }
 
 </script>

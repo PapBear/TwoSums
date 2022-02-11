@@ -33,9 +33,10 @@
         }
         &-field {
           width: 100%;
-          height: 25px;
+          height: 30px;
           margin-bottom: 8px;
           border: 1px solid #4D4D4D;
+          box-sizing:border-box;
           border-radius: 5px;
           outline: 0px;
         }
