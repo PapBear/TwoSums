@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../scss/app.css">
+  <link rel="stylesheet" href="../scss/home/home.css">
+  <link href='https://fonts.googleapis.com/css?family=Nunito Sans' rel='stylesheet'>
+  <title>TwoSums</title>
+</head>
+<body>
+  <div class="home">
+    <div class="home__title">
+      <p class="home__title-text">TwoSums</p>
+    </div>
+    <div class="home__body">
+      <div class="home__body-box">
+        <div class="home__body-box-input">
+          <p class="home__body-box-input-text">Input</p>
+          <input class="home__body-box-input-field" type="text" id="input-number"/>
+          <p class="home__body-box-input-note">*Please use "," comma to start a new number</p>
+        </div>
+        <div class="home__body-box-input">
+          <p class="home__body-box-input-text">Target</p>
+          <input class="home__body-box-input-field" type="number" id="input-target"/>
+        </div>
+        <div class="home__body-box-input">
+          <p class="home__body-box-input-text">Output</p>
+        </div>
+        <div class="home__body-box-output">
+          <p class="home__body-box-output-text">- No Output -</p>
+        </div>
+        <div class="home__body-box-button-wrapper">
+          <button class="home__body-box-button" onclick="calculateTwoSum()">
+            <p class="home__body-box-button-text">Submit</p>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="home__notification">
+      <div class="home__notification-box">
+        <div class="home__notification-box-title">
+          <p class="home__notification-box-title-text">Notification Text</p>
+        </div>
+        <div class="home__notification-box-description">
+          <p class="home__notification-box-description-text">Notification Description</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script type="text/javascript">
+
+  function showNotification(title, description) {
+    let notificationBox = document.getElementsByClassName("home__notification")[0]
+    let notificationTitle = document.getElementsByClassName("home__notification")[0]
+    let notificationDescription = document.getElementsByClassName("home__notification")[0]
+  }
+
+  function calculateTwoSum() {
+      let inputData = document.getElementById("input-number").value
+      let targetData = document.getElementById("input-target").value
+      let arrayInput = []
+
+      if(inputData != "") {
+        arrayInput = inputData.split(",")
+      } else {
+        return false  
+      }
+  
+      console.log(arrayInput)
+  }
+
+</script>
+
+</html>
