@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/scss/app.css">
+  <link rel="stylesheet" href="/scss/home/home.css">
+  <link href='https://fonts.googleapis.com/css?family=Nunito Sans' rel='stylesheet'>
+  <title>TwoSums</title>
+</head>
+<body>
+  <div class="home">
+    <div class="home__wrapper-left">
+      <div class="home__title">
+        <p class="home__title-text">TwoSums Test</p>
+      </div>
+      <div class="home__body">
+        <div class="home__body-box">
+          <div class="home__body-box-input">
+            <p class="home__body-box-input-text">Input</p>
+            <input class="home__body-box-input-field" type="text" id="input-number"/>
+            <p class="home__body-box-input-note">*Please use "," comma to start a new number</p>
+          </div>
+          <div class="home__body-box-input">
+            <p class="home__body-box-input-text">Target</p>
+            <input class="home__body-box-input-field" type="number" id="input-target"/>
+          </div>
+          <div class="home__body-box-input">
+            <p class="home__body-box-input-text">Output</p>
+          </div>
+          <div class="home__body-box-output">
+            <p class="home__body-box-output-text">- No Output -</p>
+          </div>
+          <div class="home__body-box-button-wrapper">
+            <button class="home__body-box-button" onclick="calculateTwoSum()">
+              <p class="home__body-box-button-text">Submit</p>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="home__notification">
+        <div class="home__notification-box">
+          <div class="home__notification-box-title">
+            <p class="home__notification-box-title-text">Notification Text</p>
+          </div>
+          <div class="home__notification-box-description">
+            <p class="home__notification-box-description-text">Notification Description</p>
+          </div>
+        </div>
+      </div>
+      <div class="home__author">
+        <p class="home__author-name">Joshua Hendrawan</p>
+        <div class="home__author-contact">
+          <img class="home__author-contact-img" src="/images/facebook-logo.png" alt="facebook-loog" onclick="goToContact('web','http://www.facebook.com/joshua.hendrawan.7/')">
+          <img class="home__author-contact-img" src="/images/linkedin-logo.png" alt="linkedin-logo" onclick="goToContact('web','https://www.linkedin.com/in/joshuadswa/')">
+          <img class="home__author-contact-img" src="/images/github-logo.png" alt="github-logo" onclick="goToContact('web','https://github.com/PapBear')">
+          <img class="home__author-contact-img" src="/images/gmail-logo.png" alt="gmail-logo" onclick="goToContact('mail','joshuahendrawan03@gmail.com')">
+          <img class="home__author-contact-img" src="/images/whatsapp-logo.png" alt="whatsapp-logo" onclick="goToContact('whatsapp','+62895422669875')">
+        </div>
+      </div>
+    </div>
+    <div class="home__wrapper-right">
+      <div class="home__instruction">
+        <div class="home__instruction-title">
+          <p class="home__instruction-title-text">TwoSums Instruction</p>
+        </div>
+        <div class="home__instruction-description">
+          <p class="home__instruction-description-text">Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.</p>
+          <br>
+          <p class="home__instruction-description-text">In this case, the solution may have more than one solutions.</p>
+          <br>
+          <p class="home__instruction-description-text">For Example:</p>
+          <br>
+          <p class="home__instruction-description-text">Case 1</p>
+          <br>
+          <div class="home__instruction-description-box">
+            <p class="home__instruction-description-text">Input: 3,2,6,5,8,7,9,1,4 with Target: 12</p>
+            <p class="home__instruction-description-text">Output: [0,6] as the first solution and [3,5] [4,8] as the other solutions.</p>
+          </div>
+          <br>
+          <p class="home__instruction-description-text">Case 2</p>
+          <br>
+          <div class="home__instruction-description-box">
+            <p class="home__instruction-description-text">Input: 3,8,7,9,1,4 with Target: 4</p>
+            <p class="home__instruction-description-text">Output: [0,4] as the only available solution.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script type="text/javascript">
+
+  let timeOutNotif
+
+  function showNotification(title, description) {
+    let notificationBox = document.getElementsByClassName("home__notification")[0]
+    let notificationTitle = document.getElementsByClassName("home__notification-box-title-text")[0]
+    let notificationDescription = document.getElementsByClassName("home__notification-box-description-text")[0]
+
+    notificationBox.style.display = "flex"
+
+    notificationTitle.innerHTML = title
+    notificationDescription.innerHTML = description
+
+    timeOutNotif = setTimeout(() => {
+      notificationBox.style.display = "none"
+      notificationTitle = "Notification Text"
+      notificationDescription = "Notification Description"
+    }, 8000)
+  }
+
+  function reverseWord(word) {
+    let initialWord = word[0]
+    let reversedWord = initialWord.split('').reverse().join('')
+    return reversedWord
+  }
+
+  function calculateTwoSum() {
+      let inputData = document.getElementById("input-number").value
+      let targetData = document.getElementById("input-target").value
+      let arrayInput = []
+
+      if(timeOutNotif) {
+        clearTimeout(timeOutNotif)
+      }
+      
+      // Check isi input data
+      if(inputData != "") {
+        arrayInput = inputData.split(",")
+      } else {
+        showNotification("Input data is empty!","Please fill the input data correctly.")
+        return false  
+      }
+
+      // Check isi target data
+      if(targetData == "") {
+        showNotification("Target data is empty!","Please fill the target data correctly.")
+        return false  
+      }
+
+      // Validasi input data (hanya boleh angka)
+      let nanFound = false
+      arrayInput.forEach(dt => {
+        if(isNaN(dt) || dt == "") {
+          showNotification("Not a number detected!","Please use numerical value only.")
+          nanFound = true
+        }
+      });
+
+      if(nanFound == true) {
+        return false
+      }
+
+      // Validasi target data (hanya boleh angka) 
+      if(isNaN(targetData)) {
+        showNotification("Not a number detected!","Please use numerical value only.")
+        return false
+      }
+
+      let stringTarget = []
+      let separateTarget = []
+      let correctTarget = []
+
+      for(i = 0; i < arrayInput.length; i++) {
+        for(j = 0; j < arrayInput.length; j++) {
+          if(Number(arrayInput[i]) + Number(arrayInput[j]) == Number(targetData) && i != j) {
+            stringTarget.push([String(i)+String(j)])
+            separateTarget.push([i,j])
+          }
+        }
+      }
+
+      if(stringTarget.length > 0) {
+        stringTarget.forEach((dt,index) => {
+          separateTarget.forEach(dtSeparate => {
+            if(String(dt).includes(String(dtSeparate[0])) && (String(dt).includes(String(dtSeparate[1])))) {
+              if(String(dt) != (String(dtSeparate[0]) + String(dtSeparate[1]))) {
+                if(correctTarget.length == 0) {
+                  correctTarget.push(dt)
+                } else {
+                  let safeElement = true
+                  for(i = 0; i < correctTarget.length; i++) {
+                    if(correctTarget[i] == reverseWord(dt)) {
+                      safeElement = false
+                    }
+                  }
+                  if(safeElement == true) {
+                    correctTarget.push(dt)
+                  }
+                }
+              }
+            }
+          })
+        })
+
+        let correctTargetArraySplit = []
+        //Splitting the correct target string
+        correctTarget.forEach(dt => {
+          correctTargetArraySplit.push(dt[0].split(''))
+        })
+
+        let outputText = ""
+        // Adding to output element
+        outputText = "First Solution : [" + correctTargetArraySplit[0][0] + "," + correctTargetArraySplit[0][1] + "]"
+
+        if(correctTargetArraySplit.length > 1) {
+          outputText += "<br> Other Solutions : "
+        }
+
+        for(i = 1; i < correctTargetArraySplit.length ; i++) {
+          outputText += "[" + correctTargetArraySplit[i][0] + "," + correctTargetArraySplit[i][1] + "] "
+        }
+
+        let outputElement = document.getElementsByClassName('home__body-box-output-text')[0]
+        outputElement.innerHTML = outputText
+
+
+        stringTarget.forEach(dt => {
+          correctTarget.push([Number(dt[0].split('')[0]),Number(dt[0].split('')[1])])
+        })
+      } else {
+        let outputElement = document.getElementsByClassName('home__body-box-output-text')[0]
+        outputElement.innerHTML = "No suitable solution found"
+      }
+
+  }
+
+  function goToContact(type, link) {
+    if(type == "web") {
+      window.open(link);
+    } else if(type == "mail") {
+      window.location.href = "mailto:"+link
+    } else if(type == "whatsapp") {
+      window.location.href = "https://api.whatsapp.com/send?phone="+link
+  }
+}
+
+</script>
+
+</html>

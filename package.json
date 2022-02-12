@@ -1,0 +1,23 @@
+{
+  "name": "twosums",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "sass ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PapBear/TwoSums.git"
+  },
+  "author": "PapBear",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PapBear/TwoSums/issues"
+  },
+  "homepage": "https://github.com/PapBear/TwoSums#readme",
+  "devDependencies": {
+    "sass": "^1.49.7"
+  }
+}
