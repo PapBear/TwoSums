@@ -11,6 +11,12 @@
 </head>
 <body>
   <div class="home">
+    <div class="home__welcome" onclick="setInitialAnimation()">
+      <div class="home__welcome-box">
+        <p class="home__welcome-box-text home__welcome-box-text_top">Welcome to</p>
+        <p class="home__welcome-box-text home__welcome-box-text_bottom">TwoSums</p>
+      </div>
+    </div>
     <div class="home__wrapper-left">
       <div class="home__title">
         <p class="home__title-text">TwoSums Test</p>
@@ -94,6 +100,21 @@
 <script type="text/javascript">
 
   let timeOutNotif
+
+  function setInitialAnimation() {
+    let welcomeElement = document.getElementsByClassName('home__welcome')[0]
+    let topText = document.getElementsByClassName('home__welcome-box-text_top')[0]
+    let bottomText = document.getElementsByClassName('home__welcome-box-text_bottom')[0]
+
+    topText.style.left = 0
+    bottomText.style.left = 0
+
+    setTimeout(() => {
+      welcomeElement.style.opacity = 0
+    }, 1500)
+  }
+
+  setInitialAnimation()
 
   function showNotification(title, description) {
     let notificationBox = document.getElementsByClassName("home__notification")[0]
