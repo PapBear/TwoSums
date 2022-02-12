@@ -53,6 +53,8 @@
 
 <script type="text/javascript">
 
+  let timeOutNotif
+
   function showNotification(title, description) {
     let notificationBox = document.getElementsByClassName("home__notification")[0]
     let notificationTitle = document.getElementsByClassName("home__notification-box-title-text")[0]
@@ -63,7 +65,7 @@
     notificationTitle.innerHTML = title
     notificationDescription.innerHTML = description
 
-    setTimeout(() => {
+    timeOutNotif = setTimeout(() => {
       notificationBox.style.display = "none"
       notificationTitle = "Notification Text"
       notificationDescription = "Notification Description"
@@ -81,6 +83,10 @@
       let targetData = document.getElementById("input-target").value
       let arrayInput = []
 
+      if(timeOutNotif) {
+        clearTimeout(timeOutNotif)
+      }
+      
       // Check isi input data
       if(inputData != "") {
         arrayInput = inputData.split(",")
@@ -96,12 +102,17 @@
       }
 
       // Validasi input data (hanya boleh angka)
+      let nanFound = false
       arrayInput.forEach(dt => {
-        if(isNaN(dt)) {
+        if(isNaN(dt) || dt == "") {
           showNotification("Not a number detected!","Please use numerical value only.")
-          return false
+          nanFound = true
         }
       });
+
+      if(nanFound == true) {
+        return false
+      }
 
       // Validasi target data (hanya boleh angka) 
       if(isNaN(targetData)) {
@@ -122,42 +133,59 @@
         }
       }
 
-      stringTarget.forEach((dt,index) => {
-        separateTarget.forEach(dtSeparate => {
-          if(String(dt).includes(String(dtSeparate[0])) && (String(dt).includes(String(dtSeparate[1])))) {
-            if(String(dt) != (String(dtSeparate[0]) + String(dtSeparate[1]))) {
-              if(correctTarget.length == 0) {
-                correctTarget.push(dt)
-              } else {
-                let safeElement = true
-                for(i = 0; i < correctTarget.length; i++) {
-                  if(correctTarget[i] == reverseWord(dt)) {
-                    safeElement = false
-                  }
-                }
-                if(safeElement == true) {
+      if(stringTarget.length > 0) {
+        stringTarget.forEach((dt,index) => {
+          separateTarget.forEach(dtSeparate => {
+            if(String(dt).includes(String(dtSeparate[0])) && (String(dt).includes(String(dtSeparate[1])))) {
+              if(String(dt) != (String(dtSeparate[0]) + String(dtSeparate[1]))) {
+                if(correctTarget.length == 0) {
                   correctTarget.push(dt)
+                } else {
+                  let safeElement = true
+                  for(i = 0; i < correctTarget.length; i++) {
+                    if(correctTarget[i] == reverseWord(dt)) {
+                      safeElement = false
+                    }
+                  }
+                  if(safeElement == true) {
+                    correctTarget.push(dt)
+                  }
                 }
               }
             }
-          }
+          })
         })
-      })
 
-      let correctTargetArraySplit = []
-      //Splitting the correct target string
-      correctTarget.forEach(dt => {
-        correctTargetArraySplit.push(dt[0].split(''))
-      })
+        let correctTargetArraySplit = []
+        //Splitting the correct target string
+        correctTarget.forEach(dt => {
+          correctTargetArraySplit.push(dt[0].split(''))
+        })
 
-      let outputText = ""
-      // Adding to output element
-      let outputElement = document.getElementsByClassName('home__body-box-output-text')[0]
+        let outputText = ""
+        // Adding to output element
+        outputText = "First Solution : [" + correctTargetArraySplit[0][0] + "," + correctTargetArraySplit[0][1] + "]"
+
+        if(correctTargetArraySplit.length > 1) {
+          outputText += "<br> Other Solutions : "
+        }
+
+        for(i = 1; i < correctTargetArraySplit.length ; i++) {
+          outputText += "[" + correctTargetArraySplit[i][0] + "," + correctTargetArraySplit[i][1] + "] "
+        }
+
+        let outputElement = document.getElementsByClassName('home__body-box-output-text')[0]
+        outputElement.innerHTML = outputText
 
 
-      stringTarget.forEach(dt => {
-        correctTarget.push([Number(dt[0].split('')[0]),Number(dt[0].split('')[1])])
-      })
+        stringTarget.forEach(dt => {
+          correctTarget.push([Number(dt[0].split('')[0]),Number(dt[0].split('')[1])])
+        })
+      } else {
+        let outputElement = document.getElementsByClassName('home__body-box-output-text')[0]
+        outputElement.innerHTML = "No suitable solution found"
+      }
+
   }
 
 </script>
