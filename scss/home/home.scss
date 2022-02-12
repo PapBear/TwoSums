@@ -16,6 +16,37 @@
       flex: 0.5;
     }
   }
+  &__welcome {
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
+    position: fixed;
+    background-color: #F2F2F2;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: 1s;
+    &-box {
+      position: relative;
+      bottom: 150px;
+      text-align: center;
+      &-text {
+        @include font(37px, 45px, 800, #4D4D4D);
+        &_top {
+          position: relative;
+          left: -150px;
+          transition: left 1s;
+        }
+        &_bottom {
+          text-align: right;
+          position: relative;
+          left: 150px;
+          transition: left 1s;
+        }
+      }
+    }
+  }
   &__title {
     padding: 8px;
     width: 100%;
