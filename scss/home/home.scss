@@ -7,16 +7,26 @@
 
 .home {
   font-family: 'Nunito Sans';
+  display: flex;
+  &__wrapper {
+    &-left {
+      flex: 0.5;
+    }
+    &-right {
+      flex: 0.5;
+    }
+  }
   &__title {
+    padding: 8px;
     width: 100%;
-    text-align: center;
+    // text-align: center;
     &-text {
-      @include font(16px, 24px, 800, #4D4D4D)
+      @include font(28px, 36px, 800, #4D4D4D)
     }
   }
   &__body {
-    display: flex;
-    justify-content: center;
+    // display: flex;
+    // justify-content: center;
     &-box {
       padding: 15px;
       margin-top: 20px;
@@ -66,10 +76,29 @@
       }
     }
   }
+  &__author {
+    position: Fixed;
+    bottom: 8px;
+    display: flex;
+    width: 50%;
+    &-name {
+      flex: 0.5
+    }
+    &-contact {
+      text-align: right;
+      flex: 0.4;
+      cursor: pointer;
+      &-img {
+        margin-left: 5px;
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
   &__notification {
     display: none;
     // display: flex;
-    justify-content: center;
+    // justify-content: center;
     &-box {
       padding: 15px;
       margin-top: 20px;
@@ -85,6 +114,27 @@
           padding-bottom: 5px;
           @include font(24px, 32px, 800, #4D4D4D);
         }
+      }
+    }
+  }
+  &__instruction {
+    width: 100%;
+    height: calc(100vh - 16px);
+    background-color: #1E1E1E;
+    &-title {
+      padding: 8px;
+      &-text {
+        @include font(28px, 36px, 800, #FFFFFF)
+      }
+    }
+    &-description {
+      padding: 8px;
+      &-box {
+        background: #202D39;
+        padding: 8px;
+      }
+      &-text {
+        @include font(16px, 24px, 400, #FFFFFF);
       }
     }
   }
