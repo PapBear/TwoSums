@@ -4,13 +4,19 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/scss/app.css">
-  <link rel="stylesheet" href="/scss/home/home.css">
+  <link rel="stylesheet" href="../scss/app.css">
+  <link rel="stylesheet" href="../scss/home/home.css">
   <link href='https://fonts.googleapis.com/css?family=Nunito Sans' rel='stylesheet'>
   <title>TwoSums</title>
 </head>
 <body>
   <div class="home">
+    <div class="home__welcome" onclick="setInitialAnimation()">
+      <div class="home__welcome-box">
+        <p class="home__welcome-box-text home__welcome-box-text_top">Welcome to</p>
+        <p class="home__welcome-box-text home__welcome-box-text_bottom">TwoSums</p>
+      </div>
+    </div>
     <div class="home__wrapper-left">
       <div class="home__title">
         <p class="home__title-text">TwoSums Test</p>
@@ -52,11 +58,11 @@
       <div class="home__author">
         <p class="home__author-name">Joshua Hendrawan</p>
         <div class="home__author-contact">
-          <img class="home__author-contact-img" src="/images/facebook-logo.png" alt="facebook-loog" onclick="goToContact('web','http://www.facebook.com/joshua.hendrawan.7/')">
-          <img class="home__author-contact-img" src="/images/linkedin-logo.png" alt="linkedin-logo" onclick="goToContact('web','https://www.linkedin.com/in/joshuadswa/')">
-          <img class="home__author-contact-img" src="/images/github-logo.png" alt="github-logo" onclick="goToContact('web','https://github.com/PapBear')">
-          <img class="home__author-contact-img" src="/images/gmail-logo.png" alt="gmail-logo" onclick="goToContact('mail','joshuahendrawan03@gmail.com')">
-          <img class="home__author-contact-img" src="/images/whatsapp-logo.png" alt="whatsapp-logo" onclick="goToContact('whatsapp','+62895422669875')">
+          <img class="home__author-contact-img" src="../images/facebook-logo.png" alt="facebook-loog" onclick="goToContact('web','http://www.facebook.com/joshua.hendrawan.7/')">
+          <img class="home__author-contact-img" src="../images/linkedin-logo.png" alt="linkedin-logo" onclick="goToContact('web','https://www.linkedin.com/in/joshuadswa/')">
+          <img class="home__author-contact-img" src="../images/github-logo.png" alt="github-logo" onclick="goToContact('web','https://github.com/PapBear')">
+          <img class="home__author-contact-img" src="../images/gmail-logo.png" alt="gmail-logo" onclick="goToContact('mail','joshuahendrawan03@gmail.com')">
+          <img class="home__author-contact-img" src="../images/whatsapp-logo.png" alt="whatsapp-logo" onclick="goToContact('whatsapp','+62895422669875')">
         </div>
       </div>
     </div>
@@ -94,6 +100,26 @@
 <script type="text/javascript">
 
   let timeOutNotif
+
+  function setInitialAnimation() {
+    let welcomeElement = document.getElementsByClassName('home__welcome')[0]
+    let topText = document.getElementsByClassName('home__welcome-box-text_top')[0]
+    let bottomText = document.getElementsByClassName('home__welcome-box-text_bottom')[0]
+
+    setTimeout(() => {
+      topText.style.left = 0
+      bottomText.style.left = 0
+    }, 100)
+
+    setTimeout(() => {
+      welcomeElement.style.opacity = 0
+      setTimeout(() => {
+        welcomeElement.style.display = "none"
+      }, 1000) 
+    }, 1500)
+  }
+
+  setInitialAnimation()
 
   function showNotification(title, description) {
     let notificationBox = document.getElementsByClassName("home__notification")[0]
