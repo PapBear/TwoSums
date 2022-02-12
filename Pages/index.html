@@ -106,11 +106,16 @@
     let topText = document.getElementsByClassName('home__welcome-box-text_top')[0]
     let bottomText = document.getElementsByClassName('home__welcome-box-text_bottom')[0]
 
-    topText.style.left = 0
-    bottomText.style.left = 0
+    setTimeout(() => {
+      topText.style.left = 0
+      bottomText.style.left = 0
+    }, 100)
 
     setTimeout(() => {
       welcomeElement.style.opacity = 0
+      setTimeout(() => {
+        welcomeElement.style.display = "none"
+      }, 1000) 
     }, 1500)
   }
 
